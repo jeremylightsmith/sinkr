@@ -1,0 +1,12 @@
+/ %h1 Flickr Stuff
+/ 
+/ - photosets.each do |set|
+/   .set= set.title
+
+%h1 Sinkr
+
+.stat= "You have #{Photo.count(:conditions => "source = 'flickr'")} photos from flickr"
+.stat= "You have #{Event.count(:conditions => "source = 'flickr'")} events from flickr"
+.stat= "You have #{Photo.count(:conditions => "source = 'iphoto'")} events from iphoto"
+.stat= "You have #{Event.count(:conditions => "source = 'iphoto'")} events from iphoto"
+
