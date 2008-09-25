@@ -1,0 +1,4 @@
+%h1 Events
+
+- @events.each do |event|
+  .event= link_to event.name, url(:event, event)

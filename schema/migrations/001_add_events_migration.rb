@@ -2,6 +2,7 @@ class AddEventsMigration < ActiveRecord::Migration
   def self.up
     create_table :events do |t|
       t.string :name
+      t.string :external_key
       t.string :source
     end
   end

@@ -5,7 +5,7 @@ Gem.clear_paths
 Gem.path.unshift(Merb.root / "gems")
 
 # ==== Dependencies
-dependencies "haml", "merb-haml"
+dependencies "merb-more", "haml", "merb-haml", "merb_helpers", "merb-action-args"
 require 'merb-haml'
 
 dependency "flickraw", ">= 0.4.5"

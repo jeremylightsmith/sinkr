@@ -1,0 +1,4 @@
+%h1= @service
+
+.results= "Loaded #{link_to "#{Event.count(:conditions => ["source = ?", @service])} events", url(:events, :source => @service)}"
+.results= "Loaded #{link_to "#{Photo.count(:conditions => ["source = ?", @service])} photos", url(:photos)}"

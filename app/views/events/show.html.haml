@@ -1,0 +1,4 @@
+%h1= @event.name
+
+- @event.photos.each do |photo|
+  .photo= photo.name
