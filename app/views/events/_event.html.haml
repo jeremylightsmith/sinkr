@@ -1,0 +1,8 @@
+%div[event]
+  = event.name
+  = (count = event.photos.count) > 0 ? "(#{count})" : "-"
+  .actions
+    = link_to_function "refresh", "$('#event_#{event.id}').load('/events/#{event.id}/photos/refresh')"
+  / .photos
+  /   - event.photos.each do |photo|
+  /     %span.photo[photo]= photo.name

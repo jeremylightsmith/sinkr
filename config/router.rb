@@ -22,6 +22,7 @@
 Merb.logger.info("Compiling routes...")
 Merb::Router.prepare do |r|
   # RESTful routes
+  r.match("/events/:event_id/photos/refresh").to(:controller => "photos", :action => "refresh")
   r.resources :photos
   r.resources :events
 

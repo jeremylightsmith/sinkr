@@ -1,15 +1,17 @@
 ---
 development: &defaults
-  adapter: sqlite3
-  database: db/development.db
+  adapter: mysql
+  username: root
+  password: password
+  database: sinkr_development
 
 test:
   <<: *defaults
-  database: db/test.db
+  database: sinkr_test
 
 production:
   <<: *defaults
-  database: db/production.db
+  database: sinkr_production
   
 rake:
   <<: *defaults

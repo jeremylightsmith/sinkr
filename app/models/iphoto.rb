@@ -2,8 +2,8 @@ class Iphoto
   attr_reader :library_dir
     
   def initialize(library_dir = "~/Pictures/iPhoto Library")
-    raise "Library path #{library_dir} not found" unless File.directory?(library_dir)
     @library_dir = File.expand_path(library_dir)
+    raise "Library path #{library_dir} not found" unless File.directory?(@library_dir)
   end
   
   def years
@@ -29,8 +29,22 @@ class Iphoto
       File.basename(path)
     end
     
+    def photos
+      Dir[path + "/*"].map {|file| Iphoto::Photo.new(file)}
+    end
+    
     def inspect
       "iPhoto::Event(#{name})"
+    end
+  end
+  
+  class Photo < Struct.new(:path)
+    def name
+      File.basename(path)
+    end
+    
+    def date
+      File.ctime(path)
     end
   end
 end

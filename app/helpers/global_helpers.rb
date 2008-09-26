@@ -1,5 +1,9 @@
 module Merb
   module GlobalHelpers
-    # helpers defined here available to all views.  
+    def link_to_function(name, function, opts={})
+      opts[:onclick] = "#{function}; return false;"
+      opts[:href] = "#"
+      %{<a #{ opts.to_xml_attributes }>#{name}</a>}
+    end
   end
 end

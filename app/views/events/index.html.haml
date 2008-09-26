@@ -1,4 +1,27 @@
+- throw_content(:for_header) do
+  = css_include_tag 'events'
+  = js_include_tag 'events'
+
 %h1 Events
 
-- @events.each do |event|
-  .event= link_to event.name, url(:event, event)
+.flickr
+  %h2 Flickr
+  .actions
+    = link_to "refresh events", "/services/load/flickr"
+    = link_to_function "refresh all photos", "$('.month .flickr a[text=refresh]').click()"
+
+.iphoto
+  %h2 iPhoto
+  .actions
+    = link_to "refresh", "/services/load/iphoto"
+
+- @events_by_month_by_year.keys.sort.reverse.each do |year|
+  .year{:id => year}
+    %h3= year
+    - @events_by_month_by_year[year].keys.sort.reverse.each do |month|
+      .month{:id => month}
+        %h4= display_month(month)
+        - %w(flickr iphoto).each do |service|
+          %div{:class => service}
+            - @events_by_month_by_year[year][month].find_all{|e| e.source == service}.each do |event|
+              = partial 'event', :with => event

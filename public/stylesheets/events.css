@@ -1,0 +1,42 @@
+body {
+  padding: 2em;
+}
+
+.flickr, .iphoto {
+  width: 500px;
+}
+
+.flickr {
+  float: left;
+}
+
+.iphoto {
+  margin-left: 540px;
+}
+
+.actions {
+  display: inline;
+  font-size: 8pt;
+  padding-left: 1em;
+}
+
+h3 {
+  background: black;
+  color: white;
+}
+
+h4 {
+  border-bottom: solid 2px black;
+}
+
+.year {
+  clear: both;
+}
+
+.month {
+  clear: both;
+}
+
+.event .photos {
+  font-size: 40%;
+}

@@ -1,9 +1,18 @@
-class Events < Application
+class Events < Application  
   def index(source = nil)
-    filter = {}
+    filter = {:order => 'date'}
     filter[:conditions] = ["source = ?", source] if source
+
+    @events_by_month_by_year = {}
+    @unsorted_events = []
+    Event.find(:all, filter).each do |event|
+      if event.date
+        ((@events_by_month_by_year[event.year] ||= {})[event.month] ||= []) << event
+      else
+        @unsorted_events << event
+      end
+    end
     
-    @events = Event.find(:all, filter)
     render
   end
   

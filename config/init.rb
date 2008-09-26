@@ -5,7 +5,7 @@ Gem.clear_paths
 Gem.path.unshift(Merb.root / "gems")
 
 # ==== Dependencies
-dependencies "merb-more", "haml", "merb-haml", "merb_helpers", "merb-action-args"
+dependencies "merb-more", "haml", "merb-haml", "merb_helpers", "merb-action-args", "merb-jquery"
 require 'merb-haml'
 
 dependency "flickraw", ">= 0.4.5"
@@ -16,6 +16,7 @@ FlickRaw.shared_secret = '1b88f46d8c82ef6a'
 dependency "file_sandbox", ">= 0.4"
 
 require "array_ext"
+require "dated"
 
 Merb::BootLoader.after_app_loads do
 end

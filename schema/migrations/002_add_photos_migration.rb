@@ -5,8 +5,7 @@ class AddPhotosMigration < ActiveRecord::Migration
       t.string :external_key
       t.string :source
       t.integer :event_id
-
-      t.timestamps
+      t.date :date
     end
   end
 

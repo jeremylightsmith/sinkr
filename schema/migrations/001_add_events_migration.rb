@@ -4,6 +4,7 @@ class AddEventsMigration < ActiveRecord::Migration
       t.string :name
       t.string :external_key
       t.string :source
+      t.date :date
     end
   end
 
