@@ -13,9 +13,9 @@ class AddPhotosMigration < ActiveRecord::Migration
       t.string :thumbnail_url
       
       # flickr
-      t.integer :farm
-      t.integer :server
-      t.integer :flickr_id
+      t.string :farm
+      t.string :server
+      t.string :flickr_id
       t.string :secret
     end
   end

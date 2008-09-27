@@ -1,2 +1,0 @@
-class IphotoEvent < Event
-end

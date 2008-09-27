@@ -3,18 +3,14 @@ class Event < ActiveRecord::Base
   has_many :photos, :dependent => :destroy
   
   def name=(name)
-    if name =~ /^(.+)\((\d+)\\?\/(\d+)\)$/
+    if name.to_s =~ /^(.+)\((\d+)\\?\/(\d+)\)$/
       self[:name] = $1.strip
       self.date = Date.parse("#{$2}/1/#{guess_year($3.to_i)}")
     else
       self[:name] = name
     end
-  end
-  
-  def loaded?
-    photos.count > 0
-  end
-  
-  def ensure_photos_loaded
+  rescue
+    puts "couldn't parse #{name}"
+    raise
   end
 end

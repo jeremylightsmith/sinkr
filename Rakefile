@@ -9,6 +9,7 @@ require 'spec/rake/spectask'
 require 'fileutils'
 require 'merb-core'
 require 'rubigen'
+load 'lib/tasks/db_init.rake'
 include FileUtils
 
 # Load the basic runtime dependencies; this will include 
@@ -34,3 +35,10 @@ task :svn_add do
 end
 
 task :default => :spec
+
+def run(cmd, options = {})
+  puts cmd
+  output = `#{cmd}`.strip
+  puts output
+  raise output unless $? == 0 or options[:ignore_errors] == true
+end

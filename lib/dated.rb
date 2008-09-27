@@ -4,11 +4,14 @@ module Dated
   def date=(date)
     date = Date.parse(date) if date.is_a?(String)
     self[:date] = date
-    self.year = date.year
   end
 
   def month
     date.month if date
+  end
+  
+  def year
+    date.year if date
   end
 
   def year_month

@@ -5,7 +5,8 @@ class AddEventsMigration < ActiveRecord::Migration
       t.string :external_key
       t.string :type
       t.date :date
-      t.integer :year
+      t.string :collection
+      t.boolean :loaded
     end
   end
 

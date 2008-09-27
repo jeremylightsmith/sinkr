@@ -5,10 +5,10 @@ class Services < Application
 
     case source
     when "flickr"
-      Loaders::Flickr.new.load(false)
+      FlickrEvent.reload_all
       
     when "iphoto"
-      Loaders::IphotoBridge.new.load
+      IphotoEvent.reload_all
       
     else
       raise "unknown service"
