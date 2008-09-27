@@ -24,4 +24,5 @@
         - %w(flickr iphoto).each do |service|
           %div{:class => service}
             - @events_by_month_by_year[year][month].find_all{|e| e.source == service}.each do |event|
-              = partial 'event', :with => event
+              %div[event]
+                = partial 'event', :with => event

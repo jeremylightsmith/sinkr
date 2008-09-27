@@ -20,4 +20,21 @@ class Events < Application
     @event = Event.find(id)
     render
   end
+  
+  def refresh(id)
+    event = Event.find(id)
+    event.photos.destroy_all
+    photos = flickr.photosets.getPhotos(:photoset_id => event.external_key).photo
+    photos.each do |photo|
+      event.photos.create!(:name => photo.title, :external_key => photo.id, :source => 'flickr')
+    end
+    
+    render partial("event", :with => event), :layout => false
+  end
+  
+  def expand(id)
+    event = Event.find(id)
+    @show_pictures = true
+    render partial("event", :with => event), :layout => false
+  end
 end

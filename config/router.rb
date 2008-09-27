@@ -24,7 +24,7 @@ Merb::Router.prepare do |r|
   # RESTful routes
   r.match("/events/:event_id/photos/refresh").to(:controller => "photos", :action => "refresh")
   r.resources :photos
-  r.resources :events
+  r.resources :events, :member => {:expand => :get, :refresh => :get}
 
   # This is the default route for /:controller/:action/:id
   # This is fine for most cases.  If you're heavily using resource-based

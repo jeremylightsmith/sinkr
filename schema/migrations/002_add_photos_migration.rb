@@ -6,6 +6,8 @@ class AddPhotosMigration < ActiveRecord::Migration
       t.string :source
       t.integer :event_id
       t.date :date
+      t.string :url
+      t.string :thumbnail_url
     end
   end
 

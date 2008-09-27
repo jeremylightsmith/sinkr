@@ -18,6 +18,10 @@ dependency "file_sandbox", ">= 0.4"
 require "array_ext"
 require "dated"
 
+require 'osx/cocoa'
+include OSX
+OSX.require_framework 'ScriptingBridge'
+
 Merb::BootLoader.after_app_loads do
 end
 
