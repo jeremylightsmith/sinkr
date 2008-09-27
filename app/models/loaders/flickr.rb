@@ -1,15 +1,12 @@
 module Loaders
-  class Flickr < Loaders::Base
-    def source
-      "flickr"
-    end
-    
+  class Flickr < Loaders::Base    
     def load(load_photos = false)
-      clear_events
+      FlickrEvent.delete_all
+      FlickrPhoto.delete_all
       
       sets = flickr.photosets.getList :user_id => Merb::Config[:flickr_user_id]
       sets.each do |set|
-        Event.create!(:name => set.title, :external_key => set.id, :source => source)
+        FlickrEvent.create!(:name => set.title, :external_key => set.id)
       end
     end
   end

@@ -1,9 +1,10 @@
-= event.name
+= link_to_function "v #{event.name}", "$('#event_#{event.id}').toggleClass('expanded').find('.photos').remove()", :class => 'close'
+= link_to_function "> #{event.name}", "$('#event_#{event.id}').toggleClass('expanded').load('#{url(:expand_event, event)}')", :class => 'open'
 = (count = event.photos.count) > 0 ? "(#{count})" : "-"
 .actions
-  = link_to_function "refresh", "$('#event_#{event.id}').load('#{url(:refresh_event, event)}')"
-  = link_to_function "expand", "$('#event_#{event.id}').load('#{url(:expand_event, event)}')"
-  / = link_to_function "expand", "$('#event_#{event.id}').load('/events/#{event.id}/photos/refresh')"
+  = link_to_function "reload", "$('#event_#{event.id}').load('#{url(:reload_event, event)}')"
+  = link_to_function "-", "$('#event_#{event.id}').toggleClass('big')", :class => 'smaller'
+  = link_to_function "+", "$('#event_#{event.id}').toggleClass('big')", :class => 'bigger'
 - if @show_pictures
   .photos
     - event.photos.each do |photo|

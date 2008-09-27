@@ -1,11 +1,8 @@
 class Events < Application  
-  def index(source = nil)
-    filter = {:order => 'date'}
-    filter[:conditions] = ["source = ?", source] if source
-
+  def index
     @events_by_month_by_year = {}
     @unsorted_events = []
-    Event.find(:all, filter).each do |event|
+    Event.find(:all).each do |event|
       if event.date
         ((@events_by_month_by_year[event.year] ||= {})[event.month] ||= []) << event
       else
@@ -21,19 +18,16 @@ class Events < Application
     render
   end
   
-  def refresh(id)
+  def reload(id)
     event = Event.find(id)
-    event.photos.destroy_all
-    photos = flickr.photosets.getPhotos(:photoset_id => event.external_key).photo
-    photos.each do |photo|
-      event.photos.create!(:name => photo.title, :external_key => photo.id, :source => 'flickr')
-    end
-    
-    render partial("event", :with => event), :layout => false
+    event.photos.delete_all
+    expand(id)
   end
   
   def expand(id)
-    event = Event.find(id)
+    event ||= Event.find(id)
+    event.ensure_photos_loaded
+
     @show_pictures = true
     render partial("event", :with => event), :layout => false
   end

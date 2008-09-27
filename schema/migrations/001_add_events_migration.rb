@@ -3,8 +3,9 @@ class AddEventsMigration < ActiveRecord::Migration
     create_table :events do |t|
       t.string :name
       t.string :external_key
-      t.string :source
+      t.string :type
       t.date :date
+      t.integer :year
     end
   end
 

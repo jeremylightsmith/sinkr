@@ -21,8 +21,11 @@
     - @events_by_month_by_year[year].keys.sort.reverse.each do |month|
       .month{:id => month}
         %h4= display_month(month)
-        - %w(flickr iphoto).each do |service|
-          %div{:class => service}
-            - @events_by_month_by_year[year][month].find_all{|e| e.source == service}.each do |event|
-              %div[event]
-                = partial 'event', :with => event
+        .flickr
+          - @events_by_month_by_year[year][month].find_all{|e| e.is_a? FlickrEvent}.each do |event|
+            .event{:id => "event_#{event.id}"}
+              = partial 'event', :with => event
+        .iphoto
+          - @events_by_month_by_year[year][month].find_all{|e| e.is_a? IphotoEvent}.each do |event|
+            .event{:id => "event_#{event.id}"}
+              = partial 'event', :with => event

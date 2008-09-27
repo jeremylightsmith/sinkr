@@ -1,0 +1,2 @@
+class IphotoPhoto < Photo
+end

@@ -1,0 +1,2 @@
+class IphotoEvent < Event
+end

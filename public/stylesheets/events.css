@@ -37,6 +37,21 @@ h4 {
   clear: both;
 }
 
-.event .photos {
-  font-size: 40%;
+.event .photos img {
+  height: 2em;
 }
+
+.event.big .photos img {
+  height: 7em;
+}
+
+.event .close { display: none; }
+.event .open { display: inline; }
+.event.expanded .close { display: inline; }
+.event.expanded .open { display: none; }
+
+.event .smaller { display: none; }
+.event.expanded .bigger { display: inline; }
+.event.expanded.big .bigger { display: none; }
+.event.expanded.big .smaller { display: inline; }
+.event .bigger { display: none; }
