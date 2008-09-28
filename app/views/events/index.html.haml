@@ -1,43 +1,50 @@
 - throw_content(:for_header) do
   = css_include_tag 'events'
+  = css_include_tag 'jquery.lightbox-0.5'
   = js_include_tag 'events'
+  = js_include_tag 'jquery.lightbox-0.5'
 
-%h1 Events
+.header 
+  .content
+    %h1 
+      Sinkr
+      .subtitle - a synchronization solution for Flickr &amp; iPhoto
+    .actions
+      = link_to "something", ""
 
-%div
-  .header.flickr 
+.content
+  .heading.name
+    Event
+  .heading.flickr 
     Flickr
     .actions
       = link_to "reload all events", "/sources/flickr/reload_all_events"
       = link_to "load all photos", "/sources/flickr/load_all_photos"
-  .header.iphoto 
+  .heading.iphoto 
     iPhoto
     .actions
       = link_to "reload all events", "/sources/iphoto/reload_all_events"
       = link_to "load all photos", "/sources/iphoto/load_all_photos"
 
-- @events_by_month_by_year.keys.sort.reverse.each do |year|
-  .year{:id => "year_#{year}"}
-    %h2.name
-      = link_to_function year, "$(this).year().toggle_selection_under()"
-      .actions
-        = link_to_function "select all", "select_all_until('year')"
-        = link_to_function "clear", "clear_all_until('year')"
-    - @events_by_month_by_year[year].keys.sort.reverse.each do |month|
-      .month{:id => "month_#{month}"}
-        %h3.name
-          = link_to_function month_name(month), "$(this).month().toggle_selection_under()"
-          .actions
-            = link_to_function "select all", "select_all_until('month')"
-            = link_to_function "clear", "clear_all_until('month')"
-        - @events_by_month_by_year[year][month].sort{|a,b| a.name <=> b.name}.each do |event|
-          %div[event]
-            .name.clickable{:onclick => "$('#event_#{event.id}').toggle_selection()"}
-              = event.name
-            - flickr, iphoto = event.flickr, event.iphoto
-            .flickr[flickr]
-              = partial 'external_event', :with => flickr if flickr
-              = "-" if !flickr
-            .iphoto[iphoto]
-              = partial 'external_event', :with => iphoto if iphoto
-              = "-" if !iphoto
+  - @events_by_month_by_year.keys.sort.reverse.each do |year|
+    .year{:id => "year_#{year}"}
+      %h2.name
+        = link_to_function year, "$(this).year().toggle_selection_under()"
+        .actions
+      - @events_by_month_by_year[year].keys.sort.reverse.each do |month|
+        .month{:id => "month_#{month}"}
+          %h3.name
+            = link_to_function month_name(month), "$(this).month().toggle_selection_under()"
+            .actions
+          - @events_by_month_by_year[year][month].sort{|a,b| a.name <=> b.name}.each do |event|
+            %div[event]
+              .name.clickable{:onclick => "$('#event_#{event.id}').toggle_selection()"}
+                = event.name
+              - flickr, iphoto = event.flickr, event.iphoto
+              .flickr[flickr]
+                = partial 'external_event', :with => flickr if flickr
+                = "-" if !flickr
+              .iphoto[iphoto]
+                = partial 'external_event', :with => iphoto if iphoto
+                = "-" if !iphoto
+              .clear

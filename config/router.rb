@@ -36,5 +36,5 @@ Merb::Router.prepare do |r|
   # r.default_routes
   
   # Change this for your home page to be available at /
-  r.match('/').to(:controller => 'dashboard', :action =>'index')
+  r.match('/').to(:controller => 'events', :action =>'index').name(:events)
 end

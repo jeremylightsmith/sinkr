@@ -12,4 +12,7 @@
   - if @show_pictures
     .photos
       - e.photos.each do |photo|
-        %img{:src => photo.thumbnail_url}
+        = link_to "<img src='#{photo.thumbnail_url}'/>", photo.url
+- if @show_pictures
+  :javascript
+    #{e.element}.find('.photos a').lightBox({fixedNavigation:true});
