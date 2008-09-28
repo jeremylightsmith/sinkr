@@ -45,6 +45,10 @@ h2 {
   color: white;
 }
 
+h2 a { 
+  color: white;
+}
+
 h3 {
   border-bottom: solid 2px black;
 }

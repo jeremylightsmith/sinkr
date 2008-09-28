@@ -19,14 +19,14 @@
 - @events_by_month_by_year.keys.sort.reverse.each do |year|
   .year{:id => "year_#{year}"}
     %h2.name
-      = link_to_function year, "$(find_year_for(this)).toggle_selection_under()"
+      = link_to_function year, "$(this).year().toggle_selection_under()"
       .actions
         = link_to_function "select all", "select_all_until('year')"
         = link_to_function "clear", "clear_all_until('year')"
     - @events_by_month_by_year[year].keys.sort.reverse.each do |month|
       .month{:id => "month_#{month}"}
         %h3.name
-          = link_to_function month_name(month), "$(find_month_for(this)).toggle_selection_under()"
+          = link_to_function month_name(month), "$(this).month().toggle_selection_under()"
           .actions
             = link_to_function "select all", "select_all_until('month')"
             = link_to_function "clear", "clear_all_until('month')"
