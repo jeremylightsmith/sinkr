@@ -1,6 +1,6 @@
 module Merb
   module EventsHelper
-    def display_month(month)
+    def month_name(month)
       Dated::MONTHS[month - 1]
     end
   end

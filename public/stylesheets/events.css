@@ -1,12 +1,36 @@
 body {
   padding: 2em;
+  width: 90em;
+  margin: 0 auto;
+  border: solid 1px red;
 }
 
-th.event_name { width: 20%; }
-th.flickr, th.iphoto { width: 40%; }
+.year {
+  clear: both;
+}
 
-td, th { 
-  vertical-align: top;
+.month {
+  clear: both;
+}
+
+.event {
+  clear: both;
+}
+
+.event .name {
+  float: left;
+  width: 15em;
+}
+
+.flickr {
+  float: left;
+  width: 35em;
+  margin-left: 1em;  
+}
+
+.iphoto {
+  width: 35em;
+  margin-left: 53em;
 }
 
 .actions {
@@ -16,6 +40,7 @@ td, th {
 }
 
 h2 {
+  padding: 0.1em 0.5em;
   background: black;
   color: white;
 }
@@ -40,10 +65,29 @@ h3 {
   float: left;
 }
 
-.event .when_selected { display: none;}
-.event .when_not_selected { display: block;}
-.selected.event .when_selected { display: block;}
-.selected.event .when_not_selected { display: none;}
+.event .name,
+.month .name,
+.year .name {
+  padding-left: 16px;
+  background-image: url(/images/unchecked.png);
+  background-repeat: no-repeat;
+}
+
+.month .name,
+.year .name {
+  background-position: center left;
+}
+
+.event.selected .name,
+.year .name.all_selected,
+.month .name.all_selected { 
+  background-image: url(/images/checked.png);
+}
+
+.year .name.some_selected,
+.month .name.some_selected { 
+  background-image: url(/images/half_checked.png);
+}
 
 .event .photos img {
   height: 2em;
