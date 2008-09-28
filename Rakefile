@@ -29,12 +29,20 @@ end
 # ADD YOUR CUSTOM TASKS BELOW
 ##############################################################################
 
-desc "Add new files to subversion"
-task :svn_add do
-   system "svn status | grep '^\?' | sed -e 's/? *//' | sed -e 's/ /\ /g' | xargs svn add"
+task :default => :spec
+
+desc "Show merb routes" 
+task :routes => :merb_env do
+  require 'merb-core/rack/adapter/irb'
+  Merb::Rack::Console.new.show_routes
 end
 
-task :default => :spec
+desc "Adds / removes changed files to git"
+task :sync do
+  puts `git add .`
+  files = `git ls-files --deleted`.split
+  puts `git rm #{files.map{|f| f.inspect}.join(" ")}` unless files.empty?
+end
 
 def run(cmd, options = {})
   puts cmd

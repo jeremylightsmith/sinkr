@@ -1,0 +1,15 @@
+- e = external_event
+
+- if !e.loaded?
+  = link_to_function "load photos", "#{e.element}.toggleClass('expanded').load('#{url(:expand_event_source, e)}')"
+- if e.loaded
+  = link_to_function "v #{e.photos.count} photos", "#{e.element}.toggleClass('expanded').find('.photos').remove()", :class => 'close'
+  = link_to_function "> #{e.photos.count} photos", "#{e.element}.toggleClass('expanded').load('#{url(:expand_event_source, e)}')", :class => 'open'
+  .actions
+    = link_to_function "reload", "#{e.element}.load('#{url(:reload_event_source, e)}')"
+    = link_to_function "-", "#{e.element}.toggleClass('big')", :class => 'smaller'
+    = link_to_function "+", "#{e.element}.toggleClass('big')", :class => 'bigger'
+  - if @show_pictures
+    .photos
+      - e.photos.each do |photo|
+        %img{:src => photo.thumbnail_url}

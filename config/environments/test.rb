@@ -4,3 +4,5 @@ Merb::Config.use { |c|
   c[:exception_details] = true
   c[:log_auto_flush ] = true
 }
+
+dependency "file_sandbox", ">= 0.4"

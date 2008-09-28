@@ -1,11 +1,17 @@
-class FlickrEvent < Event
+class FlickrEvent < ExternalEvent
+  has_many :photos, :class_name => 'FlickrPhoto', :foreign_key => 'external_event_id', :dependent => :destroy
+
+  def element
+    "$('#flickr_event_#{id}')"
+  end
+
   def load_photos
     photos.delete_all
 
-    photoset = flickr.photosets.getPhotos(:photoset_id => external_key,
+    photoset = flickr.photosets.getPhotos(:photoset_id => flickr_id,
                                           :extras => "date_taken, icon_server").photo
     photoset.each do |photo|
-      photos << FlickrPhoto.create!(:event_id => id, 
+      photos << FlickrPhoto.create!(:external_event_id => id, 
                                     :name => photo.title, 
                                     :date => photo.datetaken,
                                     :flickr_id => photo.id.to_i,
@@ -22,9 +28,7 @@ class FlickrEvent < Event
     
     sets = flickr.photosets.getList :user_id => Merb::Config[:flickr_user_id]
     sets.each do |set|
-      event = new(:name => set.title, :external_key => set.id)
-      event.collection = event.year ? event.year : "other"
-      event.save!
+      create!(:name => set.title, :flickr_id => set.id)
     end
   end
 end

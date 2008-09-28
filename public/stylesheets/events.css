@@ -2,16 +2,11 @@ body {
   padding: 2em;
 }
 
-.flickr, .iphoto {
-  width: 500px;
-}
+th.event_name { width: 20%; }
+th.flickr, th.iphoto { width: 40%; }
 
-.flickr {
-  float: left;
-}
-
-.iphoto {
-  margin-left: 540px;
+td, th { 
+  vertical-align: top;
 }
 
 .actions {
@@ -20,38 +15,30 @@ body {
   padding-left: 1em;
 }
 
-h3 {
+h2 {
   background: black;
   color: white;
 }
 
-h4 {
+h3 {
   border-bottom: solid 2px black;
-}
-
-.year {
-  clear: both;
-}
-
-.month {
-  clear: both;
 }
 
 .event .photos img {
   height: 2em;
 }
 
-.event.big .photos img {
+.event .big .photos img {
   height: 7em;
 }
 
 .event .close { display: none; }
 .event .open { display: inline; }
-.event.expanded .close { display: inline; }
-.event.expanded .open { display: none; }
+.event .expanded .close { display: inline; }
+.event .expanded .open { display: none; }
 
 .event .smaller { display: none; }
-.event.expanded .bigger { display: inline; }
-.event.expanded.big .bigger { display: none; }
-.event.expanded.big .smaller { display: inline; }
+.event .expanded .bigger { display: inline; }
+.event .expanded.big .bigger { display: none; }
+.event .expanded.big .smaller { display: inline; }
 .event .bigger { display: none; }

@@ -1,9 +1,15 @@
-class IphotoEvent < Event
+class IphotoEvent < ExternalEvent
+  has_many :photos, :class_name => 'IphotoPhoto', :foreign_key => 'external_event_id', :dependent => :destroy
+  
+  def element
+    "$('#iphoto_event_#{id}')"
+  end
+  
   def load_photos
     photos.delete_all
     
     iphoto_album.photos.each do |photo|
-      photos << IphotoPhoto.create!(:event_id => id,
+      photos << IphotoPhoto.create!(:external_event_id => id,
                                     :name => photo.name.to_s, 
                                     :path => photo.imagePath.to_s,
                                     :date => Date.parse(photo.date.to_s),
@@ -22,9 +28,9 @@ class IphotoEvent < Event
     folders = iphoto.albums.find_all{|a| a.properties['type'].stringValue == 'fldr'}
     folders.each do |folder|
       folder.children.each do |album|
-        create!(:collection => folder.name,
+        create!(:folder => folder.name,
                 :name => album.name, 
-                :external_key => album.properties['id'].to_s)
+                :album_id => album.properties['id'].to_s)
       end
     end
   end
@@ -34,8 +40,7 @@ class IphotoEvent < Event
   def iphoto_album
     iphoto = OSX::SBApplication.applicationWithBundleIdentifier_("com.apple.iPhoto")
     iphoto.albums.find{|a| 
-      puts "#{a.properties['id']} == #{external_key} => #{a.properties['id'].to_s == external_key}"
-      a.properties['id'].to_s == external_key
+      a.properties['id'].to_s == album_id
     }
   end
 end

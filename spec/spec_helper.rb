@@ -11,3 +11,26 @@ Spec::Runner.configure do |config|
   config.include(Merb::Test::RouteHelper)
   config.include(Merb::Test::ControllerHelper)
 end
+
+def flickr
+  $flickr
+end
+
+def set_flickr(flickr)
+  $flickr = flickr
+end
+
+module OSX
+  class SBApplication
+  end
+end
+
+def set_iphoto(iphoto)
+  OSX::SBApplication.stub!(:applicationWithBundleIdentifier_).and_return(iphoto)
+end
+
+class String
+  def stringValue
+    self
+  end
+end

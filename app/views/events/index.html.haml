@@ -4,28 +4,33 @@
 
 %h1 Events
 
-.flickr
-  %h2 Flickr
-  .actions
-    = link_to "refresh events", "/services/load/flickr"
-    = link_to_function "refresh all photos", "$('.month .flickr a[text=refresh]').click()"
+%table
+  %tr
+    %th.event_name Event
+    %th.flickr 
+      Flickr
+      .actions
+        = link_to "reload all events", "/sources/flickr/reload_all_events"
+        = link_to "load all photos", "/sources/flickr/load_all_photos"
+    %th.iphoto 
+      iPhoto
+      .actions
+        = link_to "reload all events", "/sources/iphoto/reload_all_events"
+        = link_to "load all photos", "/sources/iphoto/load_all_photos"
 
-.iphoto
-  %h2 iPhoto
-  .actions
-    = link_to "refresh", "/services/load/iphoto"
-
-- @events_by_month_by_year.keys.sort.reverse.each do |year|
-  .year{:id => year}
-    %h3= year
+  - @events_by_month_by_year.keys.sort.reverse.each do |year|
+    %tr{:id => "year_#{year}"}
+      %td{:colspan => 3}
+        %h2= year
     - @events_by_month_by_year[year].keys.sort.reverse.each do |month|
-      .month{:id => month}
-        %h4= display_month(month)
-        .flickr
-          - @events_by_month_by_year[year][month].find_all{|e| e.is_a? FlickrEvent}.each do |event|
-            .event{:id => "event_#{event.id}"}
-              = partial 'event', :with => event
-        .iphoto
-          - @events_by_month_by_year[year][month].find_all{|e| e.is_a? IphotoEvent}.each do |event|
-            .event{:id => "event_#{event.id}"}
-              = partial 'event', :with => event
+      %tr{:id => "month_#{month}"}
+        %td{:colspan => 3}
+          %h3= display_month(month)
+      - @events_by_month_by_year[year][month].sort{|a,b| a.name <=> b.name}.each do |event|
+        %tr[event]
+          %td= event.name
+          - flickr, iphoto = event.flickr, event.iphoto
+          %td.flickr[flickr]
+            = partial 'external_event', :with => flickr if flickr
+          %td.iphoto[iphoto]
+            = partial 'external_event', :with => iphoto if iphoto
