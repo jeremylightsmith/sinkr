@@ -19,16 +19,28 @@
         = link_to "load all photos", "/sources/iphoto/load_all_photos"
 
   - @events_by_month_by_year.keys.sort.reverse.each do |year|
-    %tr{:id => "year_#{year}"}
+    %tr.year{:id => "year_#{year}"}
       %td{:colspan => 3}
-        %h2= year
+        %h2
+          = year
+          .actions
+            = link_to_function "select all", "select_all_until('year')"
+            = link_to_function "clear", "clear_all_until('year')"
     - @events_by_month_by_year[year].keys.sort.reverse.each do |month|
-      %tr{:id => "month_#{month}"}
+      %tr.month{:id => "month_#{month}"}
         %td{:colspan => 3}
-          %h3= display_month(month)
+          %h3
+            = display_month(month)
+            .actions
+              = link_to_function "select all", "select_all_until('month')"
+              = link_to_function "clear", "clear_all_until('month')"
       - @events_by_month_by_year[year][month].sort{|a,b| a.name <=> b.name}.each do |event|
         %tr[event]
-          %td= event.name
+          %td
+            .clickable{:onclick => "$('#event_#{event.id}').toggleClass('selected')"}
+              = image_tag "checked.png", :class => 'when_selected'
+              = image_tag "unchecked.png", :class => 'when_not_selected'
+              = event.name
           - flickr, iphoto = event.flickr, event.iphoto
           %td.flickr[flickr]
             = partial 'external_event', :with => flickr if flickr

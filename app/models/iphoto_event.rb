@@ -1,5 +1,9 @@
 class IphotoEvent < ExternalEvent
-  has_many :photos, :class_name => 'IphotoPhoto', :foreign_key => 'external_event_id', :dependent => :destroy
+  has_many :photos, 
+           :class_name => 'IphotoPhoto', 
+           :foreign_key => 'external_event_id', 
+           :dependent => :destroy,
+           :order => 'name'
   
   def element
     "$('#iphoto_event_#{id}')"

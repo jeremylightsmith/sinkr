@@ -24,6 +24,27 @@ h3 {
   border-bottom: solid 2px black;
 }
 
+.event.selected {
+  background-color: #ffd;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  text-decoration: underline;
+}
+
+.event img.when_selected, .event img.when_not_selected { 
+  float: left;
+}
+
+.event .when_selected { display: none;}
+.event .when_not_selected { display: block;}
+.selected.event .when_selected { display: block;}
+.selected.event .when_not_selected { display: none;}
+
 .event .photos img {
   height: 2em;
 }

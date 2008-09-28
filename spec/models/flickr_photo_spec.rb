@@ -7,7 +7,7 @@ describe FlickrPhoto do
     end
 
     it "should calculate it's thumbnail url" do
-      @photo.thumbnail_url.should == "http://farm1.static.flickr.com/2/3_4bf_s.jpg"
+      @photo.thumbnail_url.should == "http://farm1.static.flickr.com/2/3_4bf_t.jpg"
     end
 
     it "should calculate it's url" do

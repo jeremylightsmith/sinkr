@@ -1,12 +1,16 @@
 class FlickrEvent < ExternalEvent
-  has_many :photos, :class_name => 'FlickrPhoto', :foreign_key => 'external_event_id', :dependent => :destroy
+  has_many :photos, 
+           :class_name => 'FlickrPhoto', 
+           :foreign_key => 'external_event_id', 
+           :dependent => :destroy,
+           :order => 'name'
 
   def element
     "$('#flickr_event_#{id}')"
   end
 
   def load_photos
-    photos.delete_all
+    photos.destroy_all
 
     photoset = flickr.photosets.getPhotos(:photoset_id => flickr_id,
                                           :extras => "date_taken, icon_server").photo

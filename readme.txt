@@ -8,6 +8,8 @@ allow firefox to see local images, add this to ~/Library/Application Support/Fir
   
 stories:
   - at select multiple events
+  - at click on a flickr photo to go to the flickr page
+  - at click on an iphoto photo to open it in iphoto
   - at (de)select all events w/in a month
   - at (de)select all events w/in a year
   - at upload all selected events to flickr (if they aren't up there yet)
